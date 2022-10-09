@@ -2,40 +2,27 @@ package src
 
 import "fmt"
 func Menu() {
-	for {
+	loop : for {
 		fmt.Println("Hello welcome to quote")
 		var choice string
 	
-		fmt.Println("[1] quote")
-		fmt.Println("[2] random quote")
-		fmt.Println("[3] search quote")
-		fmt.Println("[4] authors popular quote")
-		fmt.Println("[5] close")
+		fmt.Println("[1] random quote")
+		fmt.Println("[2] search quote")
+		fmt.Println("[3] close")
 	
 		fmt.Print("what is your choice: ")
 		fmt.Scan(&choice)
-		MenuLists(choice)
-	}
-}
-
-func MenuLists(choice string) {
-	switch choice {
-	case "1":
-		fmt.Println("hello")
-	case "2":
-		GetRandomQuote()
-	case "3":
-		var query string
-		fmt.Printf("enter query: ")
-		fmt.Scan(&query)
-		SearchQuote(query)
-	case "4":
-		fmt.Println("hello")
-	case "5":
-		fmt.Println("hello")
-		break
-	default:
-		fmt.Printf("wring choices. try again \n\n\n")
-		Menu()
+		switch choice {
+		case "1":
+			GetRandomQuote()
+		case "2":
+			SearchQuote()
+		case "3":
+			fmt.Println("hello")
+			break loop
+		default:
+			fmt.Printf("wring choices. try again \n\n\n")
+			Menu()
+		}
 	}
 }
