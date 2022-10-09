@@ -11,8 +11,9 @@ func main() {
 
 	router.GET("/", src.GetAllTodos)
 	router.GET("/:id", src.GetTodoById)
-	router.POST("/:id", src.UpdateTodo)
+	router.PUT("/:id", src.UpdateTodo)
 	router.POST("/", src.AddTodo)
+	router.DELETE("/:id", src.DeleteTodo)
 
 	router.Run("localhost:4000")
 

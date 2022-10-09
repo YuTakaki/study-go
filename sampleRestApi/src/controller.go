@@ -12,9 +12,14 @@ import (
 
 func GetTodoById(c *gin.Context) {
 	id := c.Param("id")
+	i, err := strconv.Atoi(id)
+	if err != nil {
+			// ... handle error
+			panic(err)
+	}
 
 	for _, v := range TodoLists {
-		if id == strconv.FormatInt(int64(v.ID), 2) {
+		if i == v.ID {
 			c.IndentedJSON(http.StatusOK, v)
 			return
 		}
@@ -77,6 +82,11 @@ func AddTodo(c *gin.Context) {
 
 func UpdateTodo(c *gin.Context) {
 	id := c.Param("id")
+	id_int, err := strconv.Atoi(id)
+	if err != nil {
+			// ... handle error
+			panic(err)
+	}
 	var todo Todo
 	
 	if err :=c.BindJSON(&todo); err != nil {
@@ -85,7 +95,7 @@ func UpdateTodo(c *gin.Context) {
 	}
 	
 	for i, v := range TodoLists {
-		if strconv.FormatInt(int64(v.ID), 2) == id {
+		if v.ID == id_int {
 			todos := &TodoLists[i]
 			todos.Todo = todo.Todo
 			todos.IsComplete = todo.IsComplete
@@ -93,4 +103,26 @@ func UpdateTodo(c *gin.Context) {
 			return
 		}
 	}
+}
+
+func DeleteTodo(c *gin.Context) {
+	todos := []Todo{}
+	id := c.Param("id")
+	i, err := strconv.Atoi(id)
+	if err != nil {
+			// ... handle error
+			panic(err)
+	}
+	var todo Todo
+
+	for _, v := range TodoLists {
+		if v.ID != i {
+			todos = append(todos, v)
+		} else {
+			todo = v
+		}
+	}
+
+	TodoLists = todos
+	c.IndentedJSON(http.StatusAccepted, todo)
 }
