@@ -1,10 +1,14 @@
 package main
 
 import (
-	"example/quote/src"
+	"fmt"
 )
 
+// "example/quote/src"
+
 func main() {
-	src.Menu()
+	// src.Menu()
+
+	fmt.Println('a')
 	
 }
