@@ -1,6 +1,16 @@
 package main
 
-type Todo struct {
-	Todo       string `json:"todo"`
-	IsComplete bool   `json:"isComplete"`
+import (
+	"example/restapi/src"
+
+	"github.com/gin-gonic/gin"
+)
+
+func main() {
+	router := gin.Default()
+
+	router.GET("/", src.GetAllTodos)
+
+	router.Run("localhost:4000")
+
 }
