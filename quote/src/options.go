@@ -25,7 +25,10 @@ func MenuLists(choice string) {
 	case "2":
 		GetRandomQuote()
 	case "3":
-		fmt.Println("hello")
+		var query string
+		fmt.Printf("enter query: ")
+		fmt.Scan(&query)
+		SearchQuote(query)
 	case "4":
 		fmt.Println("hello")
 	case "5":
